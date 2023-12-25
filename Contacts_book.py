@@ -1,4 +1,5 @@
 contact=dict()
+Menu=[1,2,3,4,5,0]
 def Find_Name():
     print("ввдедите фио")
     name=input()
@@ -36,47 +37,47 @@ def Print_Menu():
     print("Нажмите 4 для добавления контакта")
     print("Нажмите 5 для вывода всех контактов")
     print("Нажмите 0 для завершения программы")
+def Menu_Contact_book(a):
+    while a:
+        if a==1:
+           Find_Name() 
+        elif a==2:
+            Dell_Name()    
+        elif a==3:
+            Change_Name()
+        elif a==4:
+            Append_Name()
+        elif a==5:
+            Print_Full_Name()      
+        
+        Print_Menu()
+        a=int(input())
+        
+def Correct_Namber_Menu(a):
+    while not (a in Menu):
+        print('Введите коректное число')
+        Print_Menu()
+        a=int(input())
+    Menu_Contact_book(a)  
+    
+
+def Update_File_Contacts():
+    for key,value in contact.items():
+        print(key,value)
+        contacts.write(str(key)+' ')
+        contacts.write(str(value[0])+' ')
+        contacts.write(str(value[1])+' ')
+        contacts.write('\n')
+    
 with open('input.txt', 'r+') as contacts:
     A=contacts.readline().split()
     while A:
         contact[A[0]]=A[1:]
-        A=contacts.readline().split()
-         
+        A=contacts.readline().split()    
 Print_Menu()
-Menu=[1,2,3,4,5,0]
 a=int(input())
-#print(contact)
-while not (a in Menu):
-    Print_Menu()
-    a=int(input())
-while a:
-    if a==1:
-       Find_Name() 
-    elif a==2:
-        Dell_Name()    
-    elif a==3:
-        Change_Name()
-    elif a==4:
-        Append_Name()
-    elif a==5:
-        Print_Full_Name()      
-    
-    Print_Menu()
-    a=int(input())
-    
+Correct_Namber_Menu(a)
 contacts.close()
 contacts=open('input.txt','w')
+Update_File_Contacts()
     
-for key,value in contact.items():
-    print(key,value)
-    contacts.write(str(key)+' ')
-    contacts.write(str(value[0])+' ')
-    contacts.write(str(value[1])+' ')
-    contacts.write('\n')
-    
-        
-        
-        
-        
-        
-        
