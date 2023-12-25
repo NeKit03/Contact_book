@@ -3,7 +3,10 @@ Menu=[1,2,3,4,5,0]
 def Find_Name():
     print("ввдедите фио")
     name=input()
-    print('телефон',contact[name][0],'комментарий',contact[name][1])
+    if name in contact:
+        print('телефон',contact[name][0],'комментарий',contact[name][1])
+    else:
+        print('Контакт отсутствует')
 def Dell_Name():
     print("введите ФИО удаляемого контакта")
     del contact[input()]
@@ -68,12 +71,14 @@ def Update_File_Contacts():
         contacts.write(str(value[0])+' ')
         contacts.write(str(value[1])+' ')
         contacts.write('\n')
-    
-with open('input.txt', 'r+') as contacts:
-    A=contacts.readline().split()
-    while A:
-        contact[A[0]]=A[1:]
-        A=contacts.readline().split()    
+def open_file():
+    with open('input.txt', 'r+') as contacts:
+        A=contacts.readline().split()
+        while A:
+            contact[A[0]]=A[1:]
+            A=contacts.readline().split() 
+           
+open_file()            
 Print_Menu()
 a=int(input())
 Correct_Namber_Menu(a)
@@ -81,3 +86,11 @@ contacts.close()
 contacts=open('input.txt','w')
 Update_File_Contacts()
     
+
+    
+        
+        
+        
+        
+        
+        
